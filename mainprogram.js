@@ -343,13 +343,17 @@ function getSliderValue(sliderID) {
 
 
     function clearcalculatedstate() {
-        alert("clearcalculatedstate");
+        alert("clearcalculatedstate ~~1");
         clearxyz();
+        alert("clearcalculatedstate ~~2");
         updateOrientation(-CalculatedState.orientation);
+ alert("clearcalculatedstate ~~3");
         CalculatedState.calibratedorient = SensorState.compass.magNorth;
+        alert("clearcalculatedstate ~~4");
         CalculatedState.turndetect.turnsincemotion = 0;
-
+alert("clearcalculatedstate ~~5");
         CalculatedState.fwdmotion.distancesinceturn = 0;
+        alert("clearcalculatedstate");
     }
 
     function updatexyz(incfwdpos) {
