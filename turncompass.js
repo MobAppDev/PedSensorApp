@@ -1,4 +1,4 @@
-﻿var curr_compass_pos;
+var curr_compass_pos;
 var compass_threshhold ;
 var first_time ;
 var stable_compass_pos; 
@@ -8,6 +8,7 @@ function initcompass() {
     stable_compass_pos= curr_compass_pos;
     compass_threshhold = 5;
     first_time = 0;
+    alert("initcompass");
 }
 
 function turnfromcompass() {
