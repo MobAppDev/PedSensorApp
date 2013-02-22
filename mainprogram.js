@@ -394,7 +394,6 @@ function getSliderValue(sliderID) {
     }
 
     function ProcessData() {
-        alert("ProcessData");
         if (SensorState.accel.Enabled)
             forwardmotiondetect();
         if (SensorState.gyro.Enabled)
@@ -752,7 +751,7 @@ function getSliderValue(sliderID) {
             SensorState.gyro.Available = false;
             document.getElementById("gyroStatus").textContent = notfound;
         }
-
+        alert("the device is~~~~~~~~~~~~~~~~~~~~~~~"+ device.platform);
         Reset();
         var pollRateSelection = document.getElementById("pollRateSelect");
         pollRateSelection.addEventListener("change", function (e) {
