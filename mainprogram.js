@@ -343,6 +343,7 @@ function getSliderValue(sliderID) {
 
 
     function clearcalculatedstate() {
+        alert("clearcalculatedstate");
         clearxyz();
         updateOrientation(-CalculatedState.orientation);
         CalculatedState.calibratedorient = SensorState.compass.magNorth;
@@ -582,9 +583,9 @@ function getSliderValue(sliderID) {
         //      initialize();
         reset_step(); oldSteps = 0;
         accelYinit();
-     //   initcompass();
-     //   initgyro();
-     //   clearcalculatedstate();
+        initcompass();
+        initgyro();
+        clearcalculatedstate();
 
     //    Cleardebugtable();
     //    ClearmotionLogTable();
