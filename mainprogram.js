@@ -74,7 +74,7 @@
                     accuracy: 0.0,
                 }
         }
-        var CalculatedStateClass = new calStateClass();
+        var CalculatedState = new calStateClass();
 
 var getReadingInterval = 16;
 var DebugMessageRow = 0;
