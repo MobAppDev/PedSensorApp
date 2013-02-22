@@ -740,37 +740,47 @@ function getSliderValue(sliderID) {
       
        
         Reset();
+        alert("Method check 1~~~~~~~~~~~~~~~~~~~~~~~");
         var pollRateSelection = document.getElementById("pollRateSelect");
         pollRateSelection.addEventListener("change", function (e) {
             onSelectPollRate(pollRateSelection.value);
         }, false);
+
+alert("Method check 2~~~~~~~~~~~~~~~~~~~~~~~");
 
         var LocalStrideSlider = document.getElementById("StrideRange");
         LocalStrideSlider.addEventListener("change", function (e) {
             onSliderStrideChanged(LocalStrideSlider.value);
         }, false);
 
+alert("Method check 3~~~~~~~~~~~~~~~~~~~~~~~");
+
         var MySliderOne = document.getElementById("samplesSlider1");
         MySliderOne.addEventListener("change", function (e) {
             onMySliderOneChanged(MySliderOne.value);
         }, false);
+
+alert("Method check 4~~~~~~~~~~~~~~~~~~~~~~~");
 
         var MySliderTwo = document.getElementById("samplesSlider2");
         MySliderTwo.addEventListener("change", function (e) {
             onMySliderTwoChanged(MySliderTwo.value);
         }, false);
 
+alert("Method check 5~~~~~~~~~~~~~~~~~~~~~~~");
+
         var GyrothresholdSlider = document.getElementById("turn_thresholdslider");
         GyrothresholdSlider.addEventListener("change", function (e) {
             onGyroThresholdSliderChanged(GyrothresholdSlider.value);
         }, false);
 
-
+alert("Method check 6~~~~~~~~~~~~~~~~~~~~~~~");
 
         var loggingDurationSelect = document.getElementById("pollRateSelect");
+alert("Method check 7~~~~~~~~~~~~~~~~~~~~~~~");
         var loggingDuration = loggingDurationSelect.options[loggingDurationSelect.selectedIndex].value * 1000;
         
-         alert("the device is~~~~~~~~~~~~~~~~~~~~~~~"+ device.platform);
+         alert("Method check last~~~~~~~~~~~~~~~~~~~~~~~");
           var gyrometer = Windows.Devices.Sensors.Gyrometer.getDefault();
         SensorState.gyro.gyrometer = gyrometer;
         if (SensorState.gyro.gyrometer) {
