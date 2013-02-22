@@ -739,7 +739,7 @@ function getSliderValue(sliderID) {
         alert("the device is"+ device.platform);
       
        
-        Reset();
+       // Reset();
         alert("Method check 1~~~~~~~~~~~~~~~~~~~~~~~");
         var pollRateSelection = document.getElementById("pollRateSelect");
         pollRateSelection.addEventListener("change", function (e) {
