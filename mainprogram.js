@@ -581,7 +581,7 @@ function getSliderValue(sliderID) {
     function Reset() {
         //      initialize();
         reset_step(); oldSteps = 0;
-     //   accelYinit();
+        accelYinit();
      //   initcompass();
      //   initgyro();
      //   clearcalculatedstate();
