@@ -737,21 +737,8 @@ function getSliderValue(sliderID) {
             document.getElementById("compassStatus").textContent = notfound;
         }
         alert("the device is"+ device.platform);
-        var gyrometer = Windows.Devices.Sensors.Gyrometer.getDefault();
-        SensorState.gyro.gyrometer = gyrometer;
-        if (SensorState.gyro.gyrometer) {
-            // Choose a report interval supported by the sensor
-            var minimumReportInterval = SensorState.gyro.gyrometer.minimumReportInterval;
-            var reportInterval = minimumReportInterval > 16 ? minimumReportInterval : 16;
-            SensorState.gyro.gyrometer.reportInterval = reportInterval;
-            SensorState.gyro.getReadingInterval = reportInterval;
-            getReadingInterval = reportInterval > getReadingInterval ? reportInterval : getReadingInterval;
-            SensorState.gyro.Available = true;
-        } else {
-            SensorState.gyro.Available = false;
-            document.getElementById("gyroStatus").textContent = notfound;
-        }
-        alert("the device is~~~~~~~~~~~~~~~~~~~~~~~"+ device.platform);
+      
+       
         Reset();
         var pollRateSelection = document.getElementById("pollRateSelect");
         pollRateSelection.addEventListener("change", function (e) {
@@ -782,4 +769,20 @@ function getSliderValue(sliderID) {
 
         var loggingDurationSelect = document.getElementById("pollRateSelect");
         var loggingDuration = loggingDurationSelect.options[loggingDurationSelect.selectedIndex].value * 1000;
+        
+         alert("the device is~~~~~~~~~~~~~~~~~~~~~~~"+ device.platform);
+          var gyrometer = Windows.Devices.Sensors.Gyrometer.getDefault();
+        SensorState.gyro.gyrometer = gyrometer;
+        if (SensorState.gyro.gyrometer) {
+            // Choose a report interval supported by the sensor
+            var minimumReportInterval = SensorState.gyro.gyrometer.minimumReportInterval;
+            var reportInterval = minimumReportInterval > 16 ? minimumReportInterval : 16;
+            SensorState.gyro.gyrometer.reportInterval = reportInterval;
+            SensorState.gyro.getReadingInterval = reportInterval;
+            getReadingInterval = reportInterval > getReadingInterval ? reportInterval : getReadingInterval;
+            SensorState.gyro.Available = true;
+        } else {
+            SensorState.gyro.Available = false;
+            document.getElementById("gyroStatus").textContent = notfound;
+        }
     }
