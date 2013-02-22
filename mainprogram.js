@@ -1,4 +1,4 @@
-﻿        function sensorClass() {
+      function sensorClass() {
         this.accel= {
             Available: false,
             Enabled: false,
@@ -447,7 +447,7 @@ function getSliderValue(sliderID) {
             alert("onCompass");
             alert(heading.magneticHeading);
             alert(heading.headingMagneticNorth);
-            var magnorth = document.getElementById('magneticNorth').innerHTML = heading.h  headingMagneticNorth.toFixed(2);
+            var magnorth = document.getElementById('magneticNorth').innerHTML = heading.headingMagneticNorth.toFixed(2);
             SensorState.compass.magNorth = parseFloat(magnorth);
             if (heading.headingTrueNorth) {
                 var truenorth = document.getElementById('trueNorth').innerHTML = heading.headingTrueNorth.toFixed(2);
@@ -681,17 +681,17 @@ function getSliderValue(sliderID) {
     function initialize() {
 
         document.getElementById('AccelEnable').addEventListener('click', /*@static_cast(EventListener)*/toggleAccelerometer, false);
-        document.getElementById("GyroEnable").addEventListener("click", /*@static_cast(EventListener)*/toggleGyrometer, false);
-        document.getElementById("CompassEnable").addEventListener("click", /*@static_cast(EventListener)*/toggleCompass, false);
+        document.getElementById('GyroEnable').addEventListener("click", /*@static_cast(EventListener)*/toggleGyrometer, false);
+        document.getElementById('CompassEnable').addEventListener("click", /*@static_cast(EventListener)*/toggleCompass, false);
         document.getElementById('GPSEnable').addEventListener("click", /*@static_cast(EventListener)*/toggleGPS, false);
-        document.getElementById("ButtonReset").addEventListener("click", /*@static_cast(EventListener)*/Reset, false);
-        document.getElementById("ButtonMode").addEventListener("click", /*@static_cast(EventListener)*/toggleMode, false);
-        document.getElementById("ButtonTurns").addEventListener("click", /*@static_cast(EventListener)*/toggleTurns, false);
-        document.getElementById("ButtonMotionType").addEventListener("click", /*@static_cast(EventListener)*/toggleMotionType, false);
-        document.getElementById("CalibrateButton").addEventListener("click", /*@static_cast(EventListener)*/Calibrate, false);
-        document.getElementById("DebugLogButton").addEventListener("click", /*@static_cast(EventListener)*/toggledebugmsgMode, false);
-        document.getElementById("ForceGPScoorduse").addEventListener("click", /*@static_cast(EventListener)*/toggleforcegpsMode, false);
-        document.getElementById("MotionLogButton").addEventListener("click", /*@static_cast(EventListener)*/togglemotionmsgMode, false);
+        document.getElementById('ButtonReset').addEventListener("click", /*@static_cast(EventListener)*/Reset, false);
+        document.getElementById('ButtonMode').addEventListener("click", /*@static_cast(EventListener)*/toggleMode, false);
+        document.getElementById('ButtonTurns').addEventListener("click", /*@static_cast(EventListener)*/toggleTurns, false);
+        document.getElementById('ButtonMotionType').addEventListener("click", /*@static_cast(EventListener)*/toggleMotionType, false);
+        document.getElementById('CalibrateButton').addEventListener("click", /*@static_cast(EventListener)*/Calibrate, false);
+        document.getElementById('DebugLogButton').addEventListener("click", /*@static_cast(EventListener)*/toggledebugmsgMode, false);
+        document.getElementById('ForceGPScoorduse').addEventListener("click", /*@static_cast(EventListener)*/toggleforcegpsMode, false);
+        document.getElementById('MotionLogButton').addEventListener("click", /*@static_cast(EventListener)*/togglemotionmsgMode, false);
         // document.getElementById("scenario3Open").disabled = false;
         // document.getElementById("scenario3Revoke").disabled = true;
         // document.getElementById("scenarios").addEventListener("change", /*@static_cast(EventListener)*/resetAll, false);
@@ -718,7 +718,7 @@ function getSliderValue(sliderID) {
             SensorState.gps.Available = true;
         }
         else {
-            document.getElementById("compassStatus").textContent = notfound;
+            document.getElementById("gpsStatus").textContent = notfound;
         }
 
         var compass = navigator.compass;//Windows.Devices.Sensors.Compass.getDefault();
