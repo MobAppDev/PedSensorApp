@@ -444,17 +444,18 @@ function getSliderValue(sliderID) {
     }
     function onCompassSuccess(heading) {
         if (SensorState.compass.Enabled) {
-            alert("onCompass");
+           // alert("onCompass");
             alert(heading.magneticHeading);
-            alert(heading.headingMagneticNorth);
-            var magnorth = document.getElementById('magneticNorth').innerHTML = heading.headingMagneticNorth.toFixed(2);
+           // alert(heading.headingMagneticNorth);
+            var magnorth = document.getElementById('magneticNorth').innerHTML = heading.magneticHeading.toFixed(2);
             SensorState.compass.magNorth = parseFloat(magnorth);
-            if (heading.headingTrueNorth) {
-                var truenorth = document.getElementById('trueNorth').innerHTML = heading.headingTrueNorth.toFixed(2);
-                SensorState.compass.trueNorth = parseFloat(truenorth);
-            } else {
+            alert(SensorState.compass.magNorth);
+           // if (heading.headingTrueNorth) {
+           //     var truenorth = document.getElementById('trueNorth').innerHTML = heading.headingTrueNorth.toFixed(2);
+           //     SensorState.compass.trueNorth = parseFloat(truenorth);
+          //  } else {
                 document.getElementById('trueNorth').innerHTML = "no data";
-            }
+          //  }
         }
     }
 
