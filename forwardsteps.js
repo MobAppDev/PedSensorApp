@@ -1,4 +1,4 @@
-﻿var steps_prevVal = 1.0;
+var steps_prevVal = 1.0;
 var steps_prevprevVal = 1.0;
 var steps_peakLow = 0;
 var steps_peakHigh = 0;
@@ -14,8 +14,7 @@ var accelerometerZNeutralHighOffset = .06;
 var lastpeak = 1;// 1 is low 0 is high
 
 function reset_step() {
-     steps = 0;
-    alert("steps: "+steps);
+    steps = 0;
 } 
 
 function stepmotiondetect() {
