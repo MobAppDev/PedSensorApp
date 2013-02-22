@@ -770,6 +770,7 @@ function getSliderValue(sliderID) {
         var loggingDurationSelect = document.getElementById("pollRateSelect");
         var loggingDuration = loggingDurationSelect.options[loggingDurationSelect.selectedIndex].value * 1000;
         
+        alert("Method check last1~~~~~~~~~~~~~~~~~~~~~~~");
           var gyrometer = Windows.Devices.Sensors.Gyrometer.getDefault();
         SensorState.gyro.gyrometer = gyrometer;
         if (SensorState.gyro.gyrometer) {
