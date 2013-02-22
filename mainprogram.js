@@ -394,6 +394,7 @@ function getSliderValue(sliderID) {
     }
 
     function ProcessData() {
+        alert("ProcessData");
         if (SensorState.accel.Enabled)
             forwardmotiondetect();
         if (SensorState.gyro.Enabled)
@@ -447,7 +448,7 @@ function getSliderValue(sliderID) {
            // alert("onCompass");
            // alert(heading.magneticHeading);
            // alert(heading.headingMagneticNorth);
-            var magnorth = document.getElementById('magneticNorth').innerHTML = heading;//.magneticHeading.toFixed(2);
+            var magnorth = document.getElementById('magneticNorth').innerHTML = heading.magneticHeading.toFixed(2);
             SensorState.compass.magNorth = parseFloat(magnorth);
            // alert(SensorState.compass.magNorth);
            // if (heading.headingTrueNorth) {
