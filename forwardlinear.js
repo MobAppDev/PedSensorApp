@@ -10,20 +10,13 @@ var printcount = 0;
 
 function accelYinit() {
     accelY = [0.00, 0.00, 0.00, 0.00];
-    alert("accelY: "+accelY);
     accelYavg = [0.00, 0.00, 0.00, 0.00];
-    alert("accelYavg: "+accelYavg);
     displacement = 0;
-    alert("displacement: "+displacement);
     totaldisplacement = 0;
-    alert("totaldisplacement: "+totaldisplacement);
     old_velocity = 0;
-    alert("old_velocity: "+old_velocity);
     change_in_velocity = 0;
-    alert("change_in_velocity: "+change_in_velocity);
     time = 0;
-    alert("time: "+time);
-     alert("accelYinit");
+    alert("accelYinit");
 }
 
 function accelYintegrate() {
