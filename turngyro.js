@@ -1,4 +1,3 @@
-﻿
 var curr_gyro_angle = 0;
 var curr_gyro_z = 0;
 var stop_angle = 0;
@@ -16,6 +15,7 @@ function initgyro() {
     start_turn = 0;
     finished_turn = 0;
     //   turn_threshold = 5;
+    alert("initgyro");
 }
 
 function turnfromgyro() {
