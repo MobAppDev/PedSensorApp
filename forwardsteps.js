@@ -14,7 +14,6 @@ var accelerometerZNeutralHighOffset = .06;
 var lastpeak = 1;// 1 is low 0 is high
 
 function reset_step() {
-    alert("steps");
     steps = 0;
 } 
 
