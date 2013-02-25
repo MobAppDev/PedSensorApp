@@ -835,7 +835,7 @@ function orientationHandler(e)
             SensorState.compass.Available = false;
             document.getElementById("compassStatus").textContent = notfound;
         }
-        alert("the device is"+ device.platform);
+       // alert("the device is"+ device.platform);
       
        
         Reset();
