@@ -15,7 +15,7 @@ function initgyro() {
     start_turn = 0;
     finished_turn = 0;
     //   turn_threshold = 5;
-    alert("initgyro");
+   // alert("initgyro");
 }
 
 function turnfromgyro() {
