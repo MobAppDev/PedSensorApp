@@ -877,7 +877,7 @@ function orientationHandler(e)
         var loggingDuration = loggingDurationSelect.options[loggingDurationSelect.selectedIndex].value * 1000;
         
         
-       // if(device.platform == 'Android'){
+        if(device.platform == 'Android'){
         //  alert("Method check last1~~~~~~~~~~~~~~~~~~~~~~~");
           SensorState.gyro.Available = true;
           if (window.DeviceOrientationEvent) {
