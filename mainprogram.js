@@ -405,7 +405,7 @@ function getSliderValue(sliderID) {
 
 function orientationHandler(e)
 {
-   // alert("orientationHandler");
+    alert("orientationHandler");
    var x, y, z;
     x = document.getElementById('gyroOutputX').innerHTML = e.beta;
     y = document.getElementById('gyroOutputY').innerHTML = e.gamma;
@@ -421,17 +421,6 @@ function orientationHandler(e)
         if (SensorState.accel.Enabled) {
             SensorState.accel.accelerometer.getCurrentAcceleration(onSuccess, onError);
         }
- /*       if (SensorState.gyro.Enabled) {
-            reading = SensorState.gyro.gyrometer.getCurrentReading();
-            if (reading) {
-                x = document.getElementById('gyroOutputX').innerHTML = reading.angularVelocityX.toFixed(2);
-                y = document.getElementById('gyroOutputY').innerHTML = reading.angularVelocityY.toFixed(2);
-                z = document.getElementById('gyroOutputZ').innerHTML = reading.angularVelocityZ.toFixed(2);
-                SensorState.gyro.x = parseFloat(x);
-                SensorState.gyro.y = parseFloat(y);
-                SensorState.gyro.z = parseFloat(z);
-            }
-        } */
         if (SensorState.compass.Enabled) {
             SensorState.compass.compassdevice.getCurrentHeading(onCompassSuccess, onError);;
         }
@@ -510,23 +499,16 @@ function orientationHandler(e)
         if (SensorState.gyro.Available) {
             if (SensorState.gyro.Enabled) {
                 SensorState.gyro.Enabled = false;
-               // disableInterval();
+             //   disableInterval();
                 document.getElementById("gyroStatus").textContent = deviceoff;
                 document.getElementById("GyroEnable").style.background = 'Gray';
-              //  if (window.DeviceOrientationEvent) {
-                    window.removeEventListener('deviceorientation', orientationHandler, false);
-              //  }
-            }
                 //   disableGyro();
-        }
+            }
             else {
                 SensorState.gyro.Enabled = true;
              //   enableInterval();
                 document.getElementById("gyroStatus").textContent = deviceon;
                 document.getElementById("GyroEnable").style.background = 'Green';
-             //   if (window.DeviceOrientationEvent) {
-                    window.addEventListener('deviceorientation', orientationHandler, false);
-            //    }
                 //    enableGyro();
             }
         }
@@ -793,10 +775,9 @@ function orientationHandler(e)
         if(device.platform == 'Android'){
           alert("Method check last1~~~~~~~~~~~~~~~~~~~~~~~");
           SensorState.gyro.Available = true;
-        }
-        else {
-            SensorState.gyro.Available = false;
-            document.getElementById("gyroStatus").textContent = notfound;
+          if (window.DeviceOrientationEvent) {
+              window.addEventListener('deviceorientation', orientationHandler, false);
+          }
         }
        /*   var gyrometer = Windows.Devices.Sensors.Gyrometer.getDefault();
         SensorState.gyro.gyrometer = gyrometer;
