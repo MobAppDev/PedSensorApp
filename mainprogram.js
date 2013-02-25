@@ -403,6 +403,19 @@ function getSliderValue(sliderID) {
 
     }
 
+function orientationHandler(e)
+{
+    alert("orientationHandler");
+   var x, y, z;
+    x = document.getElementById('gyroOutputX').innerHTML = e.beta;
+    y = document.getElementById('gyroOutputY').innerHTML = e.gamma;
+    z = document.getElementById('gyroOutputZ').innerHTML = e.alpha;
+    SensorState.gyro.x = parseFloat(x);
+    SensorState.gyro.y = parseFloat(y);
+    SensorState.gyro.z = parseFloat(z);
+}
+
+
     function getCurrentReading() {
         var x, y, z, reading;
         if (SensorState.accel.Enabled) {
@@ -771,8 +784,11 @@ function getSliderValue(sliderID) {
         
         
         if(device.platform == 'Android'){
-          alert("Method check last1~~~~~~~~~~~~~~~~~~~~~~~"); 
-        //  SensorState.gyro.Available = true;
+          alert("Method check last1~~~~~~~~~~~~~~~~~~~~~~~");
+          SensorState.gyro.Available = true;
+          if (window.DeviceOrientationEvent) {
+              window.addEventListener('deviceorientation', orientationHandler, false);
+          }
         }
        /*   var gyrometer = Windows.Devices.Sensors.Gyrometer.getDefault();
         SensorState.gyro.gyrometer = gyrometer;
