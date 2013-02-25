@@ -343,17 +343,11 @@ function getSliderValue(sliderID) {
 
 
     function clearcalculatedstate() {
-        alert("clearcalculatedstate ~~1");
         clearxyz();
-        alert("clearcalculatedstate ~~2");
         updateOrientation(-CalculatedState.orientation);
- alert("clearcalculatedstate ~~3");
         CalculatedState.calibratedorient = SensorState.compass.magNorth;
-        alert("clearcalculatedstate ~~4");
         CalculatedState.turndetect.turnsincemotion = 0;
-alert("clearcalculatedstate ~~5");
         CalculatedState.fwdmotion.distancesinceturn = 0;
-        alert("clearcalculatedstate");
     }
 
     function updatexyz(incfwdpos) {
@@ -775,8 +769,12 @@ alert("clearcalculatedstate ~~5");
         var loggingDurationSelect = document.getElementById("pollRateSelect");
         var loggingDuration = loggingDurationSelect.options[loggingDurationSelect.selectedIndex].value * 1000;
         
-        alert("Method check last1~~~~~~~~~~~~~~~~~~~~~~~");
-          var gyrometer = Windows.Devices.Sensors.Gyrometer.getDefault();
+        
+        if(device.platform == "Android"){
+          alert("Method check last1~~~~~~~~~~~~~~~~~~~~~~~"); 
+        //  SensorState.gyro.Available = true;
+        }
+       /*   var gyrometer = Windows.Devices.Sensors.Gyrometer.getDefault();
         SensorState.gyro.gyrometer = gyrometer;
         if (SensorState.gyro.gyrometer) {
             // Choose a report interval supported by the sensor
@@ -789,7 +787,7 @@ alert("clearcalculatedstate ~~5");
         } else {
             SensorState.gyro.Available = false;
             document.getElementById("gyroStatus").textContent = notfound;
-        }
+        }*/
           alert("Method check last~~~~~~~~~~~~~~~~~~~~~~~");
        
     }
