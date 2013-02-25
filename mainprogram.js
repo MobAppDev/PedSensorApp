@@ -513,9 +513,9 @@ function orientationHandler(e)
                // disableInterval();
                 document.getElementById("gyroStatus").textContent = deviceoff;
                 document.getElementById("GyroEnable").style.background = 'Gray';
-                if (window.DeviceOrientationEvent) {
+              //  if (window.DeviceOrientationEvent) {
                     window.removeEventListener('deviceorientation', orientationHandler, false);
-                }
+              //  }
             }
                 //   disableGyro();
         }
@@ -524,9 +524,9 @@ function orientationHandler(e)
              //   enableInterval();
                 document.getElementById("gyroStatus").textContent = deviceon;
                 document.getElementById("GyroEnable").style.background = 'Green';
-                if (window.DeviceOrientationEvent) {
+             //   if (window.DeviceOrientationEvent) {
                     window.addEventListener('deviceorientation', orientationHandler, false);
-                }
+            //    }
                 //    enableGyro();
             }
         }
