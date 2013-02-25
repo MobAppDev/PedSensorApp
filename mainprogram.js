@@ -556,11 +556,11 @@ function orientationHandler(e)
              //   disableInterval();
                 document.getElementById("gyroStatus").textContent = deviceoff;
                 document.getElementById("GyroEnable").style.background = 'Gray';
-                if(device.platform == 'Android'){
-                  if (window.DeviceOrientationEvent) {
-                      window.removeEventListener('deviceorientation', orientationHandler, false);
-                  }
-                }
+           //     if(device.platform == 'Android'){
+           //       if (window.DeviceOrientationEvent) {
+           //           window.removeEventListener('deviceorientation', orientationHandler, false);
+           //       }
+           //     }
                 //   disableGyro();
             }
             else {
@@ -569,11 +569,11 @@ function orientationHandler(e)
                 document.getElementById("gyroStatus").textContent = deviceon;
                 document.getElementById("GyroEnable").style.background = 'Green';
                 //    enableGyro();
-                if(device.platform == 'Android'){
-                  if (window.DeviceOrientationEvent) {
-                      window.addEventListener('deviceorientation', orientationHandler, false);
-                  }
-                }
+            //    if(device.platform == 'Android'){
+             //     if (window.DeviceOrientationEvent) {
+              //        window.addEventListener('deviceorientation', orientationHandler, false);
+              //    }
+//                }
             }
         }
     }
@@ -881,7 +881,7 @@ function orientationHandler(e)
         //  alert("Method check last1~~~~~~~~~~~~~~~~~~~~~~~");
           SensorState.gyro.Available = true;
           if (window.DeviceOrientationEvent) {
-          //    window.addEventListener('deviceorientation', orientationHandler, false);
+              window.addEventListener('deviceorientation', orientationHandler, false);
           }
         }
        /*   var gyrometer = Windows.Devices.Sensors.Gyrometer.getDefault();
