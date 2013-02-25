@@ -405,7 +405,7 @@ function getSliderValue(sliderID) {
 
 function orientationHandler(e)
 {
-    alert("orientationHandler");
+   // alert("orientationHandler");
    var x, y, z;
     x = document.getElementById('gyroOutputX').innerHTML = e.beta;
     y = document.getElementById('gyroOutputY').innerHTML = e.gamma;
@@ -773,7 +773,7 @@ function orientationHandler(e)
         
         
         if(device.platform == 'Android'){
-          alert("Method check last1~~~~~~~~~~~~~~~~~~~~~~~");
+        //  alert("Method check last1~~~~~~~~~~~~~~~~~~~~~~~");
           SensorState.gyro.Available = true;
           if (window.DeviceOrientationEvent) {
               window.addEventListener('deviceorientation', orientationHandler, false);
