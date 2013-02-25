@@ -473,7 +473,7 @@ function orientationHandler(e)
            // gpschanged = false;
             if (poshandler == posdone) {
                 if (gpsturn++ > gpsinterval){
-                    cleangpsOutput();
+                  // cleangpsOutput();
                     getloc();
                 }
             }
@@ -602,7 +602,7 @@ function orientationHandler(e)
                 disableInterval();
                 document.getElementById("gpsStatus").textContent = deviceoff;
                 document.getElementById("GPSEnable").style.background = 'Gray';
-
+                cleangpsOutput();
 
                 //disableGPS();
             }
@@ -877,7 +877,7 @@ function orientationHandler(e)
         var loggingDuration = loggingDurationSelect.options[loggingDurationSelect.selectedIndex].value * 1000;
         
         
-        if(device.platform == 'Android'){
+       // if(device.platform == 'Android'){
         //  alert("Method check last1~~~~~~~~~~~~~~~~~~~~~~~");
           SensorState.gyro.Available = true;
           if (window.DeviceOrientationEvent) {
@@ -898,6 +898,6 @@ function orientationHandler(e)
             SensorState.gyro.Available = false;
             document.getElementById("gyroStatus").textContent = notfound;
         }*/
-          alert("Method check last~~~~~~~~~~~~~~~~~~~~~~~");
+        //  alert("Method check last~~~~~~~~~~~~~~~~~~~~~~~");
        
     }
