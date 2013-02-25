@@ -793,6 +793,10 @@ function orientationHandler(e)
           alert("Method check last1~~~~~~~~~~~~~~~~~~~~~~~");
           SensorState.gyro.Available = true;
         }
+        else {
+            SensorState.gyro.Available = false;
+            document.getElementById("gyroStatus").textContent = notfound;
+        }
        /*   var gyrometer = Windows.Devices.Sensors.Gyrometer.getDefault();
         SensorState.gyro.gyrometer = gyrometer;
         if (SensorState.gyro.gyrometer) {
