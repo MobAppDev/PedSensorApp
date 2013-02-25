@@ -421,7 +421,7 @@ function orientationHandler(e)
         if (SensorState.accel.Enabled) {
             SensorState.accel.accelerometer.getCurrentAcceleration(onSuccess, onError);
         }
-        if (SensorState.gyro.Enabled) {
+ /*       if (SensorState.gyro.Enabled) {
             reading = SensorState.gyro.gyrometer.getCurrentReading();
             if (reading) {
                 x = document.getElementById('gyroOutputX').innerHTML = reading.angularVelocityX.toFixed(2);
@@ -431,7 +431,7 @@ function orientationHandler(e)
                 SensorState.gyro.y = parseFloat(y);
                 SensorState.gyro.z = parseFloat(z);
             }
-        }
+        } */
         if (SensorState.compass.Enabled) {
             SensorState.compass.compassdevice.getCurrentHeading(onCompassSuccess, onError);;
         }
@@ -510,17 +510,18 @@ function orientationHandler(e)
         if (SensorState.gyro.Available) {
             if (SensorState.gyro.Enabled) {
                 SensorState.gyro.Enabled = false;
-                disableInterval();
+               // disableInterval();
                 document.getElementById("gyroStatus").textContent = deviceoff;
                 document.getElementById("GyroEnable").style.background = 'Gray';
-                window.removeEventListener('deviceorientation', orientationHandler, false);
+                if (window.DeviceOrientationEvent) {
+                    window.removeEventListener('deviceorientation', orientationHandler, false);
+                }
             }
-     
                 //   disableGyro();
         }
             else {
                 SensorState.gyro.Enabled = true;
-                enableInterval();
+             //   enableInterval();
                 document.getElementById("gyroStatus").textContent = deviceon;
                 document.getElementById("GyroEnable").style.background = 'Green';
                 if (window.DeviceOrientationEvent) {
