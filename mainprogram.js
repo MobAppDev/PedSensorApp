@@ -487,7 +487,7 @@ function orientationHandler(e)
                 }
             }
         }
-      //  ProcessData();
+        ProcessData();
     }
 
 
@@ -499,6 +499,8 @@ function orientationHandler(e)
             SensorState.accel.x = parseFloat(x);
             SensorState.accel.y = parseFloat(y);
             SensorState.accel.z = parseFloat(z);
+        
+        forwardmotiondetect();
         }
     }
     function onCompassSuccess(heading) {
