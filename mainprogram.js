@@ -522,7 +522,11 @@ function orientationHandler(e)
 
 
     function onError() {
-      //  alert('onError!');
+        if (SensorState.accel.Enabled) {
+            SensorState.accel.accelerometer.getCurrentAcceleration(onSuccess, onError);
+        }if (SensorState.compass.Enabled) {
+            SensorState.compass.compassdevice.getCurrentHeading(onCompassSuccess, onError);;
+        }
     }
 
 
