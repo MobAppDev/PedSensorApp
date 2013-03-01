@@ -24,7 +24,7 @@ function stepmotiondetect() {
     var x = SensorState.accel.x;
     var y = SensorState.accel.y;
     var z = SensorState.accel.z;
-    var magnitude = z; //Math.sqrt(x * x + y * y + z * z);
+    var magnitude = y;// z; //Math.sqrt(x * x + y * y + z * z);
 
     //AddTapMessageRow("val: " + magnitude);
 
