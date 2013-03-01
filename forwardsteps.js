@@ -35,7 +35,7 @@ function stepmotiondetect() {
         if (Math.abs(steps_peakHigh - steps_peakLow) > highLowPeakDiff) {
 
             steps++;
-            AddTapMessageRow("Steps: "+steps);
+            AddTapMessageRow("Steps: "+steps + "steps_prevVal:"+steps_prevVal);
         }
         lastpeak = 0;
     }
