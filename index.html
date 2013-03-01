@@ -17,7 +17,7 @@
    <script type="text/javascript" charset="utf-8">
 
        function onDeviceReady() {
-           //alert("onDeviceReady");
+        //   alert("onDeviceReady");
            initialize();
     }
      function init() {
@@ -29,15 +29,15 @@
 
 <body onload="init();">
     <div style="position: absolute; top: -5px; left: 0px; right: 0px; bottom: 5px;
-        width: 1360px;">
+        width: 100%">
         <div class="Content">
         <h1 style="text-align:center"><b>Pedestrian Navigation Sensor Fusion App</b></h1>
-        <p style=" visibility:hidden;width: 1348px; display: inline-block; position: absolute; left: 8px; bottom: 614.68px; top: 64px;">Notes: Place on solid level surface, aligned to the path. Turn on all sensors, wait til values stabilize, and then press Reset.  World box shows motion since last accurate gps fix.  Calculated gps box shows fusing of both.  Press 'use gps' to capture and use current inaccurate gps, and compass values.
+        <p style=" visibility:hidden; display: inline-block; position: absolute; left: 8px; bottom: 614.68px; top: 64px;">Notes: Place on solid level surface, aligned to the path. Turn on all sensors, wait til values stabilize, and then press Reset.  World box shows motion since last accurate gps fix.  Calculated gps box shows fusing of both.  Press 'use gps' to capture and use current inaccurate gps, and compass values.
            Adjust stride for step size.  Hold tablet like a lunch tray, Start walking.  You may need to pause after turning. Forward, Right, Left and U-turns only. Disable Debug messages for performance.</p>
         </div>
     	<div>
-    		<div id="DebugMessages" style="position: absolute; width: 343px; height: 478px;
-            left: 235px; top: 145px; visibility: visible; border-width: 1px; border-style: solid;
+    		<div id="DebugMessages" style="position: absolute; width: 100%; height: 300px;
+            left: 0; top: 200px; visibility: visible; border-width: 1px; border-style: solid;
             border-color: #808080; overflow-y: scroll;">
     			<table id="debugTable" border="0">
     				<tr>
@@ -105,9 +105,9 @@
                 bottom: 26px; top: 417px; width: 112.67px;">Motion messages</button><b id="motionlogvalue" style="position: absolute; right: 451px; left: 325.33px; bottom: 24px;
                 top: 431px; width: 28.67px; text-align: right;"></b>
     		</div>
-    		<div style="right: 1140px;text-align:center; position: absolute; height: 602.5px; width: 208.17px; top: 145.5px;
+    		<div style="text-align:center; position: absolute; height: 100px; width:100%; top: 100px;left:0;
             border-width: thin; border-style: solid;"><b>SENSORS</b>
-    			<div style="text-align:left;height: 120.5px;">
+    			<div style="text-align:left;position: absolute;left: 1px" >
     				<button id="AccelEnable"><b>Accel</b></button>  <b id="accelStatus">off</b>
     				<div class="item" id="accelOutput"><b>X:</b><b id="accelOutputX">no data</b>
     					<br />
@@ -117,7 +117,7 @@
     					<br />
     				</div>
     			</div>
-    			<div style="text-align:left;height: 120.5px;">
+    			<div style="text-align:left;position: absolute;left: 23%">
     				<button id="GyroEnable"><b>Gyro</b></button><b id="gyroStatus">off</b>
     				<div class="item" id="gyroOutput">
                     <b>X:</b><b id="gyroOutputX">no data</b>
@@ -128,23 +128,23 @@
     					<br />
     				</div>
     			</div>
-    			<div style="text-align:left;height: 111.5px;">
+    			<div style="text-align:left;position: absolute;left: 43%">
     				<button id="CompassEnable"><b>Compass</b></button><b id="compassStatus">off</b>
     				<div><b>Magnetic</b> </div>
     				<div>
                    <b> North:</b><b id="magneticNorth">no data</b>
-    					<div>
+    					<div style=" visibility:hidden;">
                         <b>TrueNorth:</b><b id="trueNorth">no data</b>
     					</div>
     				</div>
     			</div>
-    			<div style=" text-align:left;height: 216px;">
+    			<div style=" text-align:left;position: absolute;left: 70%">
     				<button  id="GPSEnable"><b>GPS</b></button><b id="gpsStatus">off</b>
     				<div class="item" id="locationOutput">
-    					<div style="height: 50px;" ><b>GPS Status:</b><b id="gps_status"></b>
+    					<div style="visibility:hidden;height: 0px;" ><b>GPS Status:</b><b id="gps_status"></b>
     						<br />
     					</div>
-    					<div style="height: 54px;"> <b>Position Status:</b><b id="position_status"></b>
+    					<div style="visibility:hidden;height: 4px;"> <b>Position Status:</b><b id="position_status"></b>
     						<br />
     					</div>
     					<div ><b>Latitude:</b><b id="latitude">waiting ...</b>
