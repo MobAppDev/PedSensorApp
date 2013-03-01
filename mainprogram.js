@@ -310,7 +310,7 @@ function getSliderValue(sliderID) {
     }
     function getloc() {
        // cleangpsOutput();
-
+alert("GPS");
 
         //SensorState.gps.gpsdevice.addEventListener("positionchanged", ongpsPositionChanged);
         //SensorState.gps.gpsdevice.addEventListener("statuschanged", ongpsStatusChanged);
@@ -451,9 +451,9 @@ function getSliderValue(sliderID) {
 function orientationHandler(e)
 {
    var x, y, z;
-    x = document.getElementById('gyroOutputX').innerHTML = e.beta;
-    y = document.getElementById('gyroOutputY').innerHTML = e.gamma;
-    z = document.getElementById('gyroOutputZ').innerHTML = e.alpha;
+    x = document.getElementById('gyroOutputX').innerHTML = e.beta.toFixed(2);
+    y = document.getElementById('gyroOutputY').innerHTML = e.gamma.toFixed(2);
+    z = document.getElementById('gyroOutputZ').innerHTML = e.alpha.toFixed(2);
     SensorState.gyro.x = parseFloat(x);
     SensorState.gyro.y = parseFloat(y);
     SensorState.gyro.z = parseFloat(z);
@@ -481,10 +481,7 @@ function orientationHandler(e)
         }if (SensorState.gps.Enabled) {
            // gpschanged = false;
             if (poshandler == posdone) {
-                if (gpsturn++ > gpsinterval){
-                  // cleangpsOutput();
-                    getloc();
-                }
+                if (gpsturn++ > gpsinterval)getloc();
             }
         }
         ProcessData();
@@ -493,9 +490,9 @@ function orientationHandler(e)
 
     function onSuccess(acceleration) {
         if (SensorState.accel.Enabled) {
-            var x = document.getElementById('accelOutputX').innerHTML = acceleration.x;
-            var y = document.getElementById('accelOutputY').innerHTML = acceleration.y;
-            var z = document.getElementById('accelOutputZ').innerHTML = acceleration.z;
+            var x = document.getElementById('accelOutputX').innerHTML = acceleration.x.toFixed(2);
+            var y = document.getElementById('accelOutputY').innerHTML = acceleration.y.toFixed(2);
+            var z = document.getElementById('accelOutputZ').innerHTML = acceleration.z.toFixed(2);
             SensorState.accel.x = parseFloat(x);
             SensorState.accel.y = parseFloat(y);
             SensorState.accel.z = parseFloat(z);
