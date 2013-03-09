@@ -261,8 +261,8 @@ function getPositionHandler(pos) {
             SensorState.gps.latitude = pos.coords.latitude;
             SensorState.gps.longitude = pos.coords.longitude;
             SensorState.gps.accuracy = pos.coords.accuracy;
-            document.getElementById('latitude').innerHTML = SensorState.gps.latitude.toFixed(6);
-            document.getElementById('longitude').innerHTML = SensorState.gps.longitude.toFixed(6);
+            document.getElementById('latitude').innerHTML = SensorState.gps.latitude.toFixed(3);
+            document.getElementById('longitude').innerHTML = SensorState.gps.longitude.toFixed(3);
             document.getElementById('accuracy').innerHTML = SensorState.gps.accuracy;
             gpschanged = true;
             if (SensorState.gps.accuracy > gpsthreshold) {
@@ -286,7 +286,7 @@ function getPositionErrorHandler(err) {
 
 function getloc() {
    // cleangpsOutput();
-    alert("GPS");
+  //  alert("GPS");
 
     //SensorState.gps.gpsdevice.addEventListener("positionchanged", ongpsPositionChanged);
     //SensorState.gps.gpsdevice.addEventListener("statuschanged", ongpsStatusChanged);
