@@ -77,14 +77,14 @@
                 -webkit-box-shadow: inset 0px 0px 6px #000000;
                 box-shadow: inset 0px 0px 6px #000000;
                 width: 85%;
-                min-width: 400px;
-                padding: 5px;
+                min-width: 600px;
                 top: 60%;
                 visibility: visible;
-                overflow: hidden;
+                overflow-x:scroll;
+                overflow-y: hidden;
                 position: absolute;
                 display:block;left: 145px;
-               
+                bottom: 10px;
                 height:35%;
                 margin-right: 20px;
             }
@@ -211,7 +211,7 @@
             </div>
 
             <div id="Controls" class="controls-box">
-                <button id="ButtonMode" style="position: absolute; left: 22.5px; top: 9px; ">Mode</button>
+                <button id="ButtonMode" style="position: absolute; left: 15.5px; top: 9px; ">Mode</button>
                     <b id="modeLabel" style="position: absolute; left: 140px; top: 14px; width: 85px;">Indoor</b>
                 <button id="CalibrateButton" style="position: absolute; right: 80px; top:9px; ">Calibrate</button>
                 <button id="ButtonReset" style="position: absolute; right: 180px; top: 9px; ">Reset</button>
@@ -223,7 +223,7 @@
                     <option value="128">Poll Rate 128 msecs.</option>
                     <option value="256">Poll Rate 256 msecs.</option>
                 </select>
-                <button id="ButtonMotionType" style="position: absolute; left: 22.5px; top: 40.5px; ">Motion Type</button><b id="motionTypeLabel" style="position: absolute;  left: 145px; 
+                <button id="ButtonMotionType" style="position: absolute; left: 15.5px; top: 40.5px; ">Motion Type</button><b id="motionTypeLabel" style="position: absolute;  left: 145px; 
                         top: 45px; width: 78.67px;"><b>Step</b></b>
                 <button id="ButtonTurns" style="position: absolute; left: 200.5px;
                         top: 40.5px; ">Turns</button><b id="turnLabel" style="position: absolute;left: 300px; 
@@ -231,23 +231,23 @@
                 <div id="sliderStride" style="position: absolute; 
                      left: 392.67px; top: 80px;"><b>0.50</b></div>
                 <input class="sliderStrideValue" type="range" id="StrideRange" min="0.0" max="1.0"
-                       value="0.50" style="position: absolute; left: 200px; top: 80px; bottom:" step="0.01" /><b id="strideSliderLabel" style="position: absolute;  left: 22.5px; 
+                       value="0.50" style="position: absolute; left: 200px; top: 80px; bottom:" step="0.01" /><b id="strideSliderLabel" style="position: absolute;  left: 15.5px; 
                        top: 80px;">Stride(m)</b>
                 <div id="sliderLabel1" style="position: absolute; 
                      left: 392.67px; top: 110px;"><b>15</b></div>
                 <input class="samplesslider1" type="range" id="samplesSlider1" min="0" max="60" value="15"
-                       style="position: absolute; left:200px; top: 110px;" /><b id="SliderOneLabel" style=" position: absolute;left: 22.5px;
+                       style="position: absolute; left:200px; top: 110px;" /><b id="SliderOneLabel" style=" position: absolute;left: 15.5px;
                        top: 108px; ">Samples between peaks</b>
                 <div id="sliderLabel2" style="position: absolute; 
                      left: 392.67px; top: 135px;"><b>0.2</b></div>
                 <input class="samplesslider2" type="range" id="samplesSlider2" min="0.0" max="1.0"
                        value="0.2" style="position: absolute; left: 200px; top: 135px;" step="0.01" /><b id="SliderTwoLabel" style="position: absolute;
-                       top: 135px; left: 22.5px">Minimum peak to peak distance</b>
+                       top: 135px; left: 15.5px;">Minimum peak to peak distance</b>
                 <div id="turn_thresholdLabel" style="position: absolute;
                     left: 392.67px; top: 160px;">10</div>
                 <input class="sliderturn_thresholdValue" type="range" id="turn_thresholdslider" min="1" max="90" value="10"
                        style="position: absolute; left: 200px; top: 160px; bottom: 76px;" step="1" />
-                <b id="sliderturn_thresholdLabel" style="position: absolute; left: 22.5px; top: 160px;">
+                <b id="sliderturn_thresholdLabel" style="position: absolute; left: 15.5px; top: 160px;">
                     Turn threshhold(deg)</b>
                 <button id="DebugLogButton" style="visibility:hidden; height: 0px; position: absolute; right: 499.67px; left: 24px;
                         bottom: 26px; top: 417px; ">Debug messages</button><b id="debuglogvalue" style="position: absolute; right: 451px; left: 146px; bottom: 21px;
