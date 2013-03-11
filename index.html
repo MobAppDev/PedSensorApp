@@ -25,7 +25,7 @@
 
             }
         </script>
-        <style type="text/css">
+         <style type="text/css">
             .div-bg {
                 background: #005499; /* Old browsers */
                 background: -moz-linear-gradient(top,  #005499 0%, #008dd4 100%); /* FF3.6+ */
@@ -43,6 +43,7 @@
                 overflow:hidden;
             }
 
+
             .senBtn-box {
                 -moz-border-radius: 1px;
                 -webkit-border-radius: 1px;
@@ -55,6 +56,7 @@
                 padding:5px;
             }
 
+
             .dbgStep-box {
                 -moz-border-radius: 1px;
                 -webkit-border-radius: 1px;
@@ -62,7 +64,7 @@
                 -moz-box-shadow: inset 0px 0px 6px #000000;
                 -webkit-box-shadow: inset 0px 0px 6px #000000;
                 box-shadow: inset 0px 0px 6px #000000;
-                width: 86%; height: 45%;
+                width: 86%; height: 50%;
                 position:absolute;
                 left: 145px; visibility: visible; overflow-y: scroll;
                 text-align: left;
@@ -78,23 +80,20 @@
                 box-shadow: inset 0px 0px 6px #000000;
                 width: 86%;
                 min-width: 600px;
-                top: 65%;
+                top: 66%;
                 visibility: visible;
-                overflow:scroll;
+                overflow:hidden;
                 position: absolute;
                 display:block;left: 145px;
-                bottom: 10px;
-                height:180px;
+                bottom: 30px;
                 margin-right: 20px;
+                height:230px;
             }
             button{
                 -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
                 -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
                 box-shadow:inset 0px 1px 0px 0px #ffffff;
-                background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
-                background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
-                background-color:#ededed;
-                -moz-border-radius:6px;
+                 -moz-border-radius:6px;
                 -webkit-border-radius:6px;
                 border-radius:6px;
                 border:1px solid #dcdcdc;
@@ -110,6 +109,7 @@
                 height:10px; 
             }  
 
+
             input[type='range']::-webkit-slider-thumb {  
                 -webkit-appearance: none;  
                 background-color: #444;  
@@ -117,10 +117,12 @@
                 height: 10px;  
             }
 
+
         </style>
     </head>
 
-   <body onload="init();">
+
+    <body onload="init();">
         <div class="div-bg">
             <div class="Content" style="margin-bottom:10px;">
                 <h1 style="text-align: center"><b>Pedestrian Navigation Sensor Fusion App</b></h1>
@@ -150,50 +152,48 @@
                 </table>
             </div>
             <div class="senBtn-box"><b>SENSORS</b>
-                <div style="text-align:left;height: 95px;">
-                    <button id="AccelEnable"><b>Accel</b></button>  <b id="accelStatus">off</b>
-                    <div class="item" id="accelOutput"><b>X:</b><b id="accelOutputX">no data</b>
+                <div style="text-align:left;height: 105px;">
+                    <button id="AccelEnable"><b>Accel</b></button> <br /><b>Status: </b> <b id="accelStatus">off</b>
+                    <div class="item" id="accelOutput"><b>X: </b><b id="accelOutputX">no data</b>
                         <br />
-                        <b>Y:</b><b id="accelOutputY">no data</b>
+                        <b>Y: </b><b id="accelOutputY">no data</b>
                         <br />
-                        <b>Z:</b><b id="accelOutputZ">no data</b>
+                        <b>Z: </b><b id="accelOutputZ">no data</b>
                         <br />
                     </div>
                 </div>
-                <div style="text-align:left;height: 95px;">
-                    <button id="GyroEnable"><b>Gyro</b></button><b id="gyroStatus">off</b>
+                <div style="text-align:left;height: 105px;">
+                    <button id="GyroEnable"><b>Gyro</b></button>
                     <div class="item" id="gyroOutput">
-                        <b>X:</b><b id="gyroOutputX">no data</b>
+                        <b>Status: </b><b id="gyroStatus">off</b><br />
+                        <b>X: </b><b id="gyroOutputX">no data</b>
                         <br />
-                        <b>Y:</b><b id="gyroOutputY">no data</b>
+                        <b>Y: </b><b id="gyroOutputY">no data</b>
                         <br />
-                        <b>Z:</b><b id="gyroOutputZ">no data</b>
+                        <b>Z: </b><b id="gyroOutputZ">no data</b>
                         <br />
                     </div>
                 </div>
-                <div style="text-align:left;height: 95px;">
-                    <button id="CompassEnable"><b>Compass</b></button><b id="compassStatus">off</b>
-                    <div><b>Magnetic</b> </div>
+                <div style="text-align:left;height: 105px;">
+                    <button id="CompassEnable"><b>Compass</b></button><br /><b>Status: </b> <b id="compassStatus">off</b>
                     <div>
-                        <b> North:</b><b id="magneticNorth">no data</b>
-                        <div>
-                            <b>TrueNorth:</b><b id="trueNorth">no data</b>
-                        </div>
+                        <b>Magnetic North: </b><b id="magneticNorth">no data</b> <br />
+                        <b>TrueNorth: </b><b id="trueNorth">no data</b>
                     </div>
                 </div>
                 <div style=" text-align:left;height: 100px;">
-                    <button  id="GPSEnable"><b>GPS</b></button><b id="gpsStatus">off</b>
+                    <button  id="GPSEnable"><b>GPS</b></button><br /><b>Status: </b><b id="gpsStatus">off</b>
                     <div class="item" id="locationOutput">
-                        <div style="height: 40px;" ><b>GPS Status:</b><b id="gps_status"></b>
+                        <div style="height: 40px;" ><b>GPS Status: </b><b id="gps_status"></b>
                             <br />
                         </div>
                         <div style="height: 35px;"> <b>Position Status: </b><b id="position_status"></b>
                             <br />
                         </div>
-                        <div ><b>Latitude:</b><b id="latitude">waiting ...</b>
-                            <b> Longitude:</b><b id="longitude">waiting ...</b>
-                            <b>Accuracy:</b><b id="accuracy">waiting ...</b>
-                            <b>bearing:</b><b id="bearing">0</b>
+                        <div ><b>Latitude: </b><b id="latitude">waiting ...</b>
+                            <b> Longitude: </b><b id="longitude">waiting ...</b>
+                            <b>Accuracy: </b><b id="accuracy">waiting ...</b>
+                            <b>bearing: </b><b id="bearing">0</b>
                         </div>
                     </div>
                 </div>
@@ -225,32 +225,32 @@
                     <option value="128">Poll Rate 128 msecs.</option>
                     <option value="256">Poll Rate 256 msecs.</option>
                 </select>
-                <button id="ButtonMotionType" style="position: absolute; left: 15.5px; top: 45.5px; ">Motion Type</button><b id="motionTypeLabel" style="position: absolute;  left: 145px; 
-                        top: 45px; width: 78.67px;"><b>Step</b></b>
+                <button id="ButtonMotionType" style="position: absolute; left: 15.5px; top: 50px; ">Motion Type</button><b id="motionTypeLabel" style="position: absolute;  left: 145px; 
+                        top: 55px; width: 78.67px;"><b>Step</b></b>
                 <button id="ButtonTurns" style="position: absolute; left: 200.5px;
-                        top: 45.5px; ">Turns</button><b id="turnLabel" style="position: absolute;left: 300px; 
-                        top: 45px; width: 78.67px;">Snap</b>
-                <div style="position:absolute;left:15.5px;top:70px; display:inline;">
+                        top:50px; ">Turns</button><b id="turnLabel" style="position: absolute;left: 300px; 
+                        top: 55px; width: 78.67px;">Snap</b>
+                <div style="position:absolute;left:15.5px;top:80px; display:inline;">
                     <b id="strideSliderLabel">Stride(m)</b>
                     <input class="sliderStrideValue" type="range" id="StrideRange" min="0.0" max="1.0" value="0.50" step="0.01" />
                     <b id="sliderStride" >0.50</b>
                 </div>
-                <div id="sliderLabel1" style="position: absolute; 
-                     left: 392.67px; top: 110px;"><b>15</b></div>
-                <input class="samplesslider1" type="range" id="samplesSlider1" min="0" max="60" value="15"
-                       style="position: absolute; left:200px; top: 110px;" /><b id="SliderOneLabel" style=" position: absolute;left: 15.5px;
-                       top: 108px; ">Samples between peaks</b>
-                <div id="sliderLabel2" style="position: absolute; 
-                     left: 392.67px; top: 135px;"><b>0.2</b></div>
-                <input class="samplesslider2" type="range" id="samplesSlider2" min="0.0" max="1.0"
-                       value="0.2" style="position: absolute; left: 200px; top: 135px;" step="0.01" /><b id="SliderTwoLabel" style="position: absolute;
-                       top: 135px; left: 15.5px;">Minimum peak to peak distance</b>
-                <div id="turn_thresholdLabel" style="position: absolute;
-                    left: 392.67px; top: 160px;">10</div>
-                <input class="sliderturn_thresholdValue" type="range" id="turn_thresholdslider" min="1" max="90" value="10"
-                       style="position: absolute; left: 200px; top: 160px; bottom: 76px;" step="1" />
-                <b id="sliderturn_thresholdLabel" style="position: absolute; left: 15.5px; top: 160px;">
-                    Turn threshhold(deg)</b>
+                <div style="position:absolute;left:15.5px;top:110px; display:inline;">
+                    <b id="SliderOneLabel">Samples between peaks</b>
+                     <input class="samplesslider1" type="range" id="samplesSlider1" min="0" max="60" value="15" />
+                    <b id="sliderLabel1">15</b>
+                </div>
+                <div style="position:absolute;left:15.5px;top:140px; display:inline;">
+                    <b id="SliderTwoLabel" >Minimum peak to peak distance</b>
+                    <input class="samplesslider2" type="range" id="samplesSlider2" min="0.0" max="1.0" value="0.2" step="0.01" />
+                    <b id="sliderLabel2">0.2</b>
+                </div>
+                <div style="position:absolute;left:15.5px;top:170px; display:inline;">
+                    <b id="sliderturn_thresholdLabel">Turn threshhold(deg)</b>
+                    <input class="sliderturn_thresholdValue" type="range" id="turn_thresholdslider" min="1" max="90" value="10" step="1" />
+                    <b id="turn_thresholdLabel">10</b>
+                </div>
+
                 <button id="DebugLogButton" style="visibility:hidden; height: 0px; position: absolute; right: 499.67px; left: 24px;
                         bottom: 26px; top: 417px; ">Debug messages</button><b id="debuglogvalue" style="position: absolute; right: 451px; left: 146px; bottom: 21px;
                         top: 434px; width: 78.67px;"></b>
