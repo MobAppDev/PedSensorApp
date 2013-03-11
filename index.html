@@ -120,7 +120,7 @@
         </style>
     </head>
 
-    <body onload="init();">
+   <body onload="init();">
         <div class="div-bg">
             <div class="Content" style="margin-bottom:10px;">
                 <h1 style="text-align: center"><b>Pedestrian Navigation Sensor Fusion App</b></h1>
@@ -130,6 +130,7 @@
                 </p>
             </div>
 
+
             <div id="MotionLog" style="position: absolute; width: 0px; height: 0px; left: 233.5px;
                  top: 150px; visibility: hidden; border: 1px solid #808080; overflow-y: scroll;
                  -ms-transition-property: none;">
@@ -138,6 +139,7 @@
                         <td style="text-align:center;width: 0px; height: 20.5px;"><b>STEPS  AND TURNS</b></td>
                     </tr>
                 </table>
+
 
             </div>
             <div id="DebugMessages" class="dbgStep-box">
@@ -185,13 +187,13 @@
                         <div style="height: 40px;" ><b>GPS Status:</b><b id="gps_status"></b>
                             <br />
                         </div>
-                        <div style="height: 30px;"> <b>Position Status:</b><b id="position_status"></b>
+                        <div style="height: 35px;"> <b>Position Status: </b><b id="position_status"></b>
                             <br />
                         </div>
                         <div ><b>Latitude:</b><b id="latitude">waiting ...</b>
                             <b> Longitude:</b><b id="longitude">waiting ...</b>
                             <b>Accuracy:</b><b id="accuracy">waiting ...</b>
-                            <b>bearing:</b><b id="bearing">waiting ...</b>
+                            <b>bearing:</b><b id="bearing">0</b>
                         </div>
                     </div>
                 </div>
@@ -209,29 +211,30 @@
                 </div>
             </div>
 
+
             <div id="Controls" class="controls-box">
                 <button id="ButtonMode" style="position: absolute; left: 15.5px; top: 9px; ">Mode</button>
                     <b id="modeLabel" style="position: absolute; left: 140px; top: 14px; width: 85px;">Indoor</b>
                 <button id="CalibrateButton" style="position: absolute; right: 80px; top:9px; ">Calibrate</button>
                 <button id="ButtonReset" style="position: absolute; right: 180px; top: 9px; ">Reset</button>
                 <select id="pollRateSelect" aria-labelledby="listLabel" style="position: absolute;
-                        right: 80.5px; top: 40.5px;">
+                        right: 80.5px; top: 45.5px;">
                     <option value="16">Poll Rate 16 msecs.</option>
                     <option value="32">Poll Rate 32 msecs.</option>
                     <option value="64">Poll Rate 64 msecs.</option>
                     <option value="128">Poll Rate 128 msecs.</option>
                     <option value="256">Poll Rate 256 msecs.</option>
                 </select>
-                <button id="ButtonMotionType" style="position: absolute; left: 15.5px; top: 40.5px; ">Motion Type</button><b id="motionTypeLabel" style="position: absolute;  left: 145px; 
+                <button id="ButtonMotionType" style="position: absolute; left: 15.5px; top: 45.5px; ">Motion Type</button><b id="motionTypeLabel" style="position: absolute;  left: 145px; 
                         top: 45px; width: 78.67px;"><b>Step</b></b>
                 <button id="ButtonTurns" style="position: absolute; left: 200.5px;
-                        top: 40.5px; ">Turns</button><b id="turnLabel" style="position: absolute;left: 300px; 
+                        top: 45.5px; ">Turns</button><b id="turnLabel" style="position: absolute;left: 300px; 
                         top: 45px; width: 78.67px;">Snap</b>
-                <div id="sliderStride" style="position: absolute; 
-                     left: 392.67px; top: 80px;"><b>0.50</b></div>
-                <input class="sliderStrideValue" type="range" id="StrideRange" min="0.0" max="1.0"
-                       value="0.50" style="position: absolute; left: 200px; top: 80px; bottom:" step="0.01" /><b id="strideSliderLabel" style="position: absolute;  left: 15.5px; 
-                       top: 80px;">Stride(m)</b>
+                <div style="position:absolute;left:15.5px;top:70px; display:inline;">
+                    <b id="strideSliderLabel">Stride(m)</b>
+                    <input class="sliderStrideValue" type="range" id="StrideRange" min="0.0" max="1.0" value="0.50" step="0.01" />
+                    <b id="sliderStride" >0.50</b>
+                </div>
                 <div id="sliderLabel1" style="position: absolute; 
                      left: 392.67px; top: 110px;"><b>15</b></div>
                 <input class="samplesslider1" type="range" id="samplesSlider1" min="0" max="60" value="15"
@@ -255,6 +258,7 @@
                         bottom: 26px; top: 417px; ">Motion messages</button><b id="motionlogvalue" style="position: absolute; right: 451px; left: 325.33px; bottom: 24px;
                         top: 431px; width: 28.67px; text-align: right;"></b>
             </div>
+
 
             <div style="position: absolute;visibility:hidden;"><b>Calculated GPS</b>
                 <button id="ForceGPScoorduse" style="position: absolute; right: 223px; left: auto;
