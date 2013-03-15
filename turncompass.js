@@ -8,7 +8,6 @@ function initcompass() {
     stable_compass_pos= curr_compass_pos;
     compass_threshhold = 5;
     first_time = 0;
-   // alert("initcompass");
 }
 
 function turnfromcompass() {
@@ -24,7 +23,7 @@ function turnfromcompass() {
     if (!((curr_compass_pos != stable_compass_pos) && (curr_compass_pos <= stable_compass_pos + compass_threshhold) && (curr_compass_pos >= compass_pos - compass_threshhold))){
         stable_compass_pos = curr_compass_pos;
        }
-  //  AddTapMessageRow("Current Compass Position" + stable_compass_pos);
+//    AddTapMessageRow("Current Compass Position" + stable_compass_pos);
     }
 
 
