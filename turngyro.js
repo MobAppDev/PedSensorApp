@@ -1,3 +1,4 @@
+
 var curr_gyro_angle = 0;
 var curr_gyro_z = 0;
 var stop_angle = 0;
@@ -10,17 +11,16 @@ var finished_turn = 0;
  
 
 function initgyro() {
-    curr_gyro_z = SensorState.gyro.y; //z
+    curr_gyro_z = SensorState.gyro.z;
     curr_gyro_angle += -curr_gyro_z * getReadingInterval / 1000;
     start_turn = 0;
     finished_turn = 0;
     //   turn_threshold = 5;
-   // alert("initgyro");
 }
 
 function turnfromgyro() {
 
-    curr_gyro_z = SensorState.gyro.y;//z
+    curr_gyro_z = SensorState.gyro.z;
     curr_gyro_angle += (-curr_gyro_z * getReadingInterval) / 1000;
     curr_gyro_angle %= 360;
 
