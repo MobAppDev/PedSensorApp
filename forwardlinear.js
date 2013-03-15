@@ -16,7 +16,7 @@ function accelYinit() {
     old_velocity = 0;
     change_in_velocity = 0;
     time = 0;
-  //  alert("accelYinit");
+    
 }
 
 function accelYintegrate() {
