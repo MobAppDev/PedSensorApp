@@ -423,9 +423,9 @@ function stopWatch() {
 
 function orientationHandler(e) {
     var x, y, z;
-    x = document.getElementById('gyroOutputX').innerHTML = e.beta;
-    y = document.getElementById('gyroOutputY').innerHTML = e.gamma;
-    z = document.getElementById('gyroOutputZ').innerHTML = e.alpha;
+    x = document.getElementById('gyroOutputX').innerHTML = e.beta.toFixed(2);
+    y = document.getElementById('gyroOutputY').innerHTML = e.gamma.toFixed(2);
+    z = document.getElementById('gyroOutputZ').innerHTML = e.alpha.toFixed(2);
     SensorState.gyro.x = parseFloat(x);
     SensorState.gyro.y = parseFloat(y);
     SensorState.gyro.z = parseFloat(z);
