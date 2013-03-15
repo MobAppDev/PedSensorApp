@@ -1,89 +1,85 @@
-    function sensorClass() {
-        this.accel= {
+function sensorClass() {
+    this.accel = {
+        Available: false,
+        Enabled: false,
+        intervalId: 0,
+        getReadingInterval: 0,
+        accelerometer: null,
+        x: 0,
+        y: 0,
+        z: 0,
+    },
+    this.gyro = {
+        Available: false,
+        Enabled: false,
+        intervalId: 0,
+        getReadingInterval: 0,
+        gyrometer: null,
+        x: 0,
+        y: 0,
+        z: 0,
+    },
+    this.compass = {
+        Available: false,
+        cEnabled: false,
+        intervalId: 0,
+        getReadingInterval: 0,
+        compassdevice: null,
+        magNorth: 0,
+        trueNorth: 0,
+    },
+    this.gps = {
+        Available: false,
+        Enabled: false,
+        intervalId: 0,
+        getReadingInterval: 0,
+        gpsdevice: null,
+        longitude: 0.0,
+        latitude: 0.0,
+        accuracy: 0.0,
+    }
+}
+var SensorState = new sensorClass();
+
+function calStateClass() {
+    this.longitude = 0.0,
+        this.latitude = 0.0,
+        this.accuracy = 0.0,
+        this.x = 0.0,
+        this.y = 0.0,
+        this.z = 0.0,
+        this.orientation = 0,      //0 is in  initial y direction
+        this.calibratedorient = 0,  //compass angle at calibration
+        this.fwdmotion = {
             Available: false,
             Enabled: false,
-            intervalId: 0,
-            getReadingInterval: 0,
-            accelerometer: null,
+            distancesinceturn: 0.0,
             x: 0,
             y: 0,
             z: 0,
         },
-        this.gyro= {
+        this.turndetect = {
             Available: false,
             Enabled: false,
-            intervalId: 0,
-            getReadingInterval: 0,
-            gyrometer: null,
+            turnsincemotion: 0.0,
             x: 0,
             y: 0,
             z: 0,
         },
-        this.compass = {
-            Available: false,
-            cEnabled: false,
-            intervalId: 0,
-            getReadingInterval: 0,
-            compassdevice: null,
-            magNorth: 0,
-            trueNorth: 0,
-        },
-        this.gps= {
-            Available: false,
-            Enabled: false,
-            intervalId: 0,
-            getReadingInterval: 0,
-            gpsdevice: null,
+        this.goodgps = {
             longitude: 0.0,
             latitude: 0.0,
             accuracy: 0.0,
         }
-        }
+}
+var CalculatedState = new calStateClass();
 
-
-        var SensorState = new sensorClass();
-
-
-        function calStateClass() {
-            this.longitude = 0.0,
-                this.latitude = 0.0,
-                this.accuracy = 0.0,
-                this.x = 0.0,
-                this.y = 0.0,
-                this.z = 0.0,
-                this.orientation = 0,      //0 is in  initial y direction
-                this.calibratedorient = 0,  //compass angle at calibration
-                this.fwdmotion = {
-                    Available: false,
-                    Enabled: false,
-                    distancesinceturn: 0.0,
-                    x: 0,
-                    y: 0,
-                    z: 0,
-                },
-                this.turndetect = {
-                    Available: false,
-                    Enabled: false,
-                    turnsincemotion: 0.0,
-                    x: 0,
-                    y: 0,
-                    z: 0,
-                },
-                this.goodgps = {
-                    longitude: 0.0,
-                    latitude: 0.0,
-                    accuracy: 0.0,
-                }
-        }
-        var CalculatedState = new calStateClass();
-
-
-var getReadingInterval = 16;
+var getReadingInterval = 5;//16;
 var DebugMessageRow = 0;
 var MotionLogRow = 0;
 var MotionLogColumn = 0;
 var ModeButtonState = 0;   // 0 = Indoor  1 = Outdoor
-var TurnMode = 0;   // 0 = Snap    1 = Variable
+var TurnMode = 0   // 0 = Snap    1 = Variable
 var Stride = 0.5;  //in meters
 var MotionType = 0;        // 0 = Step    1 = Linear
 var debugmsgen = true;
@@ -154,7 +150,7 @@ function getSliderValue(sliderID) {
 }
 
 var threshold = 10;
-var steps = 0;
+//var steps = 0;
 var loa = 1.0;
 var hia = 1.0;
 var preva = 0;
@@ -162,8 +158,7 @@ var avga = 0;
 var numsamples = 20;
 var samples = 0;
 var trend = 0;
-var up = 1; 
-var down = -1;
+var up = 1; down = -1;
 var notfound = "not found";
 var deviceon = "on";
 var deviceoff = "off";
@@ -173,28 +168,35 @@ var turnsSnap = "Snap";
 var turnsVariable = "Variable";
 var motionTypeStep = "Step";
 var motionTypeLinear = "Linear";
+var nodata = "no data";
 var devicesPolled = 0;
 var intervalId = 0;
 var LastRow = 0;
-var Column1 = 0;
-var Column2 = 1;
+var Column1 = 0
+var Column1 = 1;
 var oldSteps = 0;
 
-    /*
-    function ChangeMotionLogLastCell(message) {
-        var t = document.getElementById('motionlogTable');
-        var x = t.insertRow(MotionLogRow);
-        var y = x.insertCell(0);
-        var z = x.insertCell(1);
 
+function id(elementId) {
+    return document.getElementById(elementId);
+}
 
-        y.innerHTML = MotionLogRow.toString() + " " + message;
-        z.innerHTML = MotionLogRow.toString() + " " + message2;
-        var m = document.getElementById('MotionLog');
-        m.scrollTop = m.scrollHeight;
-    }
+/*
+function ChangeMotionLogLastCell(message) {
+    var t = document.getElementById('motionlogTable');
+    var x = t.insertRow(MotionLogRow);
+    var y = x.insertCell(0);
+    var z = x.insertCell(1);
+
+    y.innerHTML = MotionLogRow.toString() + " " + message;
+    z.innerHTML = MotionLogRow.toString() + " " + message2;
+    var m = document.getElementById('MotionLog');
+    m.scrollTop = m.scrollHeight;
+}
 */
 
+
+ 
 function forwardmotiondetect() {
     if (MotionType == 1) linearmotiondetect();
     if (MotionType == 0) stepmotiondetect();
@@ -214,9 +216,7 @@ function forwardmotiondetect() {
         oldSteps = steps;
     }
 }
-
-function updateOrientation(angle) 
-{
+function updateOrientation(angle) {
     CalculatedState.orientation += angle;
     CalculatedState.orientation %= 360;
     if (Math.abs(CalculatedState.orientation) >= 180) {
@@ -228,7 +228,6 @@ function updateOrientation(angle)
     }
     document.getElementById('worldo').innerHTML = CalculatedState.orientation;
 }
-
 function turndetect() {
     turnfromgyro();
     //turnfromcompass();
@@ -241,18 +240,15 @@ function turndetect() {
         CalculatedState.fwdmotion.distancesinceturn = 0.0;
     }
 }
-
 function cleangpsOutput() {
     document.getElementById('gps_status').innerHTML = " ";
     document.getElementById('latitude').innerHTML = "waiting...";
     document.getElementById('longitude').innerHTML = "waiting...";
     document.getElementById('accuracy').innerHTML = "waiting...";
 
-    cleancalcgpsOutput();
 }
 
 function getPositionHandler(pos) {
-    //alert("get pos");
     if (pos) {
         if ((SensorState.gps.latitude == pos.coords.latitude) && (SensorState.gps.longitude == pos.coords.longitude)) {
             gpschanged = false;
@@ -261,8 +257,8 @@ function getPositionHandler(pos) {
             SensorState.gps.latitude = pos.coords.latitude;
             SensorState.gps.longitude = pos.coords.longitude;
             SensorState.gps.accuracy = pos.coords.accuracy;
-            document.getElementById('latitude').innerHTML = SensorState.gps.latitude.toFixed(3);
-            document.getElementById('longitude').innerHTML = SensorState.gps.longitude.toFixed(3);
+            document.getElementById('latitude').innerHTML = SensorState.gps.latitude.toFixed(6);
+            document.getElementById('longitude').innerHTML = SensorState.gps.longitude.toFixed(6);
             document.getElementById('accuracy').innerHTML = SensorState.gps.accuracy;
             gpschanged = true;
             if (SensorState.gps.accuracy > gpsthreshold) {
@@ -283,31 +279,28 @@ function getPositionErrorHandler(err) {
     document.getElementById("gps_status").textContent = err.message;
     poshandler = posdone;
 }
-
 function getloc() {
-   // cleangpsOutput();
-  //  alert("GPS");
+    //cleangpsOutput();
 
     //SensorState.gps.gpsdevice.addEventListener("positionchanged", ongpsPositionChanged);
     //SensorState.gps.gpsdevice.addEventListener("statuschanged", ongpsStatusChanged);
     poshandler = posnotdone; gpsturn = 0;
     SensorState.gps.gpsdevice.getCurrentPosition(getPositionHandler, getPositionErrorHandler);
 }
-
 function cleancalcgpsOutput() {
     //document.getElementById('gps_status').innerHTML = " ";
     document.getElementById('calclatitude').innerHTML = "waiting...";
     document.getElementById('calclongitude').innerHTML = "waiting...";
     //document.getElementById('accuracy').innerHTML = "waiting...";
-}
 
+}
 function showcalcgpsOutput() {
     //document.getElementById('gps_status').innerHTML = " ";
     document.getElementById('calclatitude').innerHTML = CalculatedState.latitude.toFixed(6);
     document.getElementById('calclongitude').innerHTML = CalculatedState.longitude.toFixed(6);
     //document.getElementById('accuracy').innerHTML = "waiting...";
-}
 
+}
 function resetmotionduetonewgpsfix() {
     reset_step(); oldSteps = 0;
     //accelYinit();
@@ -315,7 +308,6 @@ function resetmotionduetonewgpsfix() {
     initgyro();
     clearcalculatedstate();
 }
-
 function GPSfixdetect() {
     if (gpschanged || forcegpsuse) {
         if ((SensorState.gps.accuracy <= gpsthreshold)|| forcegpsuse) {
@@ -330,21 +322,16 @@ function GPSfixdetect() {
             }
         }
 
-
         gpschanged = false;
-
 
     }
 }
-
 function showxyz() {
     document.getElementById('worldx').innerHTML = CalculatedState.x;
     document.getElementById('worldy').innerHTML = CalculatedState.y;
     document.getElementById('worldz').innerHTML = CalculatedState.z;
 
-
 }
-
 function clearxyz() {
     CalculatedState.x = 0;
     CalculatedState.y = 0;
@@ -352,11 +339,13 @@ function clearxyz() {
     showxyz();
 }
 
+
 function clearcalculatedstate() {
     clearxyz();
     updateOrientation(-CalculatedState.orientation);
     CalculatedState.calibratedorient = SensorState.compass.magNorth;
     CalculatedState.turndetect.turnsincemotion = 0;
+
     CalculatedState.fwdmotion.distancesinceturn = 0;
 }
 
@@ -369,6 +358,7 @@ function updatexyz(incfwdpos) {
         CalculatedState.x -= incfwdpos;
     } else if (CalculatedState.orientation == 180) {
         CalculatedState.y -= incfwdpos;
+
     }
     CalculatedState.z = 0;
     showxyz();
@@ -377,29 +367,24 @@ function updatexyz(incfwdpos) {
 function calcnewgps(lon1, lat1, d, brng) { // formula From
     //  http://www.movable-type.co.uk/scripts/latlong.html#destPoint
     var lat2 = Math.asin(Math.sin(lat1) * Math.cos(d / Rearth) +
-                         Math.cos(lat1) * Math.sin(d / Rearth) * Math.cos(brng));
+                            Math.cos(lat1) * Math.sin(d / Rearth) * Math.cos(brng));
     var lon2 = lon1 + Math.atan2(Math.sin(brng) * Math.sin(d / Rearth) * Math.cos(lat1),
-                                 Math.cos(d / Rearth) - Math.sin(lat1) * Math.sin(lat2));
+                                    Math.cos(d / Rearth) - Math.sin(lat1) * Math.sin(lat2));
     return { longitude: lon2, latitude: lat2 };
 }
-
 function calculatefix() {
 /*        if (CalculatedState.orientation == 0) {
 
-
     } else if (CalculatedState.orientation == 90) {
-
 
     } else if (CalculatedState.orientation == -90) {
 
-
     } else if (CalculatedState.orientation == 180) {
-
 
     }*/
     var d = Math.sqrt(Math.pow(CalculatedState.x, 2) + Math.pow(CalculatedState.y, 2));
     var brng = Math.atan2(CalculatedState.y, CalculatedState.x) + CalculatedState.calibratedorient * Math.PI / 180;
-    var longlat = calcnewgps(CalculatedState.goodgps.longitude * Math.PI / 180, CalculatedState.goodgps.latitude * Math.PI / 180, d, brng);
+    var longlat = calcnewgps(CalculatedState.goodgps.longitude * Math.PI / 180, CalculatedState.goodgps.latitude * Math.PI / 180, d, brng)
     CalculatedState.longitude = longlat.longitude * 180 / Math.PI;
     CalculatedState.latitude = longlat.latitude * 180 / Math.PI;
     CalculatedState.accuracy = CalculatedState.goodgps.accuracy;
@@ -414,25 +399,68 @@ function ProcessData() {
     if (SensorState.gps.Enabled)
         GPSfixdetect();
     calculatefix();
+
 }
 
-function orientationHandler(e)
-{
+var watchID = null;
+function onSuccess(acceleration) {
+    if (SensorState.accel.Enabled) {
+        var x = acceleration.x.toFixed(2);
+        var y = acceleration.y.toFixed(2);
+        var z = acceleration.z.toFixed(3);
+        SensorState.accel.x = parseFloat(x);
+        SensorState.accel.y = parseFloat(y);
+        SensorState.accel.z = parseFloat(z);
+    }
+}
+
+function stopWatch() {
+    if (watchID) {
+        SensorState.accel.accelerometer.clearWatch(watchID);
+        watchID = null;
+    }
+}
+
+function orientationHandler(e) {
     var x, y, z;
-    x = document.getElementById('gyroOutputX').innerHTML = e.beta.toFixed(2);
-    y = document.getElementById('gyroOutputY').innerHTML = e.gamma.toFixed(2);
-    z = document.getElementById('gyroOutputZ').innerHTML = e.alpha.toFixed(2);
+    x = document.getElementById('gyroOutputX').innerHTML = e.beta;
+    y = document.getElementById('gyroOutputY').innerHTML = e.gamma;
+    z = document.getElementById('gyroOutputZ').innerHTML = e.alpha;
     SensorState.gyro.x = parseFloat(x);
     SensorState.gyro.y = parseFloat(y);
     SensorState.gyro.z = parseFloat(z);
 }
 
+function onCompassSuccess(heading) {
+    if (SensorState.compass.Enabled) {
+        var magnorth = document.getElementById('magneticNorth').innerHTML = heading.magneticHeading.toFixed(2);
+        SensorState.compass.magNorth = parseFloat(magnorth);
+        document.getElementById('trueNorth').innerHTML = "no data";
+     }
+}
+
+
+function onError() {
+    //  alert('onError!');
+}
+
+
 function getCurrentReading() {
+    var x, y, z, reading;
     if (SensorState.accel.Enabled) {
-        SensorState.accel.accelerometer.getCurrentAcceleration(onSuccess, onError);
-    }if(devicePlatform != 'Android' && SensorState.gyro.Enabled) {
-        var x,y,z;
-        var reading = SensorState.gyro.gyrometer.getCurrentReading();
+       // reading = SensorState.accel.accelerometer.getCurrentReading();
+     //   if (reading) {
+        x = document.getElementById('accelOutputX').innerHTML = SensorState.accel.x;//reading.accelerationX.toFixed(2);
+        y = document.getElementById('accelOutputY').innerHTML = SensorState.accel.y;// reading.accelerationY.toFixed(2);
+        z = document.getElementById('accelOutputZ').innerHTML = SensorState.accel.z;// reading.accelerationZ.toFixed(2);
+       //     SensorState.accel.x = parseFloat(x);
+        //    SensorState.accel.y = parseFloat(y);
+       //     SensorState.accel.z = parseFloat(z);
+
+     //   }
+    }
+    if (devicePlatform != 'Android' && SensorState.gyro.Enabled) {      // if (SensorState.gyro.Enabled) {
+        reading = SensorState.gyro.gyrometer.getCurrentReading();
         if (reading) {
             x = document.getElementById('gyroOutputX').innerHTML = reading.angularVelocityX.toFixed(2);
             y = document.getElementById('gyroOutputY').innerHTML = reading.angularVelocityY.toFixed(2);
@@ -441,124 +469,102 @@ function getCurrentReading() {
             SensorState.gyro.y = parseFloat(y);
             SensorState.gyro.z = parseFloat(z);
         }
-    }if (SensorState.compass.Enabled) {
-        SensorState.compass.compassdevice.getCurrentHeading(onCompassSuccess, onError);;
-    }if (SensorState.gps.Enabled) {
-       // gpschanged = false;
+    }
+    if (SensorState.compass.Enabled) {
+        SensorState.compass.compassdevice.getCurrentHeading(onCompassSuccess, onError);
+       // reading = SensorState.compass.compassdevice.getCurrentReading();
+      //  if (reading) {
+     //   document.getElementById('magneticNorth').innerHTML = SensorState.compass.magNorth;// reading.headingMagneticNorth.toFixed(2);
+       //     SensorState.compass.magNorth = parseFloat(magnorth);
+      //      if (reading.headingTrueNorth) {
+       //         var truenorth = document.getElementById('trueNorth').innerHTML = reading.headingTrueNorth.toFixed(2);
+       //         SensorState.compass.trueNorth = parseFloat(truenorth);
+       //     } else {
+     //           document.getElementById('trueNorth').innerHTML = "no data";
+      //      }
+     //   }
+    }
+    if (SensorState.gps.Enabled) {
+        // gpschanged = false;
         if (poshandler == posdone) {
-            if (gpsturn++ > gpsinterval)getloc();
+            if (gpsturn++  > gpsinterval) getloc();
         }
     }
     ProcessData();
-}
-
-function onSuccess(acceleration) {
-    if (SensorState.accel.Enabled) {
-        var x = document.getElementById('accelOutputX').innerHTML = acceleration.x.toFixed(2);
-        var y = document.getElementById('accelOutputY').innerHTML = acceleration.y.toFixed(2);
-        var z = document.getElementById('accelOutputZ').innerHTML = acceleration.z.toFixed(2);
-        SensorState.accel.x = parseFloat(x);
-        SensorState.accel.y = parseFloat(y);
-        SensorState.accel.z = parseFloat(z);
-
-    forwardmotiondetect();
-    }
-}
-
-function onCompassSuccess(heading) {
-    if (SensorState.compass.Enabled) {
-       // alert("onCompass");
-       // alert(heading.magneticHeading);
-       // alert(heading.headingMagneticNorth);
-        var magnorth = document.getElementById('magneticNorth').innerHTML = heading.magneticHeading.toFixed(2);
-        SensorState.compass.magNorth = parseFloat(magnorth);
-       // alert(SensorState.compass.magNorth);
-       // if (heading.headingTrueNorth) {
-       //     var truenorth = document.getElementById('trueNorth').innerHTML = heading.headingTrueNorth.toFixed(2);
-       //     SensorState.compass.trueNorth = parseFloat(truenorth);
-      //  } else {
-            document.getElementById('trueNorth').innerHTML = "no data";
-      //  }
-    }
-}
-
-function onError() {
-    if (SensorState.accel.Enabled) {
-        SensorState.accel.accelerometer.getCurrentAcceleration(onSuccess, onError);
-    }if (SensorState.compass.Enabled) {
-        SensorState.compass.compassdevice.getCurrentHeading(onCompassSuccess, onError);;
-    }
 }
 
 function enableInterval() {
     if (devicesPolled == 0)
         intervalId = setInterval(getCurrentReading, getReadingInterval);
     devicesPolled++;
-    ProcessData();
 }
 
 function disableInterval() {
-    if (devicesPolled == 1){
+    if (devicesPolled == 1)
         clearInterval(intervalId);
-    }
     devicesPolled--;
 }
+
 
 function toggleAccelerometer() {
     if (SensorState.accel.Available) {
         if (SensorState.accel.Enabled) {
             SensorState.accel.Enabled = false;
             disableInterval();
+            stopWatch();
+            document.getElementById('accelOutputX').innerHTML = nodata;
+            document.getElementById('accelOutputY').innerHTML = nodata
+            document.getElementById('accelOutputZ').innerHTML = nodata;
             document.getElementById("accelStatus").textContent = deviceoff;
             document.getElementById("AccelEnable").style.background = 'Gray';
             // ClearmotionLogTable(); //debug only
         }
         else {
             SensorState.accel.Enabled = true;
+            var option = { frequency: 1 };
+            watchID = null;
+            watchID = SensorState.accel.accelerometer.watchAcceleration(onSuccess, onError, option);
+          //  SensorState.accel.accelerometer.getCurrentAcceleration(onSuccess, onError);
             enableInterval();
             document.getElementById("accelStatus").textContent = deviceon;
             document.getElementById("AccelEnable").style.background = 'Green';
-
+                
         }
     }
 }
-
 function toggleGyrometer() {
     if (SensorState.gyro.Available) {
         if (SensorState.gyro.Enabled) {
             SensorState.gyro.Enabled = false;
-         //   disableInterval();
+            if (devicePlatform == 'Android') {
+                 window.removeEventListener('deviceorientation', orientationHandler, false);
+            } else
+                disableInterval();
+            document.getElementById('gyroOutputX').innerHTML = nodata;
+            document.getElementById('gyroOutputY').innerHTML = nodata;
+            document.getElementById('gyroOutputZ').innerHTML = nodata;
             document.getElementById("gyroStatus").textContent = deviceoff;
             document.getElementById("GyroEnable").style.background = 'Gray';
-            if(devicePlatform == 'Android'){
-             // if (window.DeviceOrientationEvent) {
-                  window.removeEventListener('deviceorientation', orientationHandler, false);
-            //  }
-            }else
-                disableInterval();
             //   disableGyro();
         }
         else {
             SensorState.gyro.Enabled = true;
-         //   enableInterval();
+            if (devicePlatform == 'Android') {
+                window.addEventListener('deviceorientation', orientationHandler, false);
+            } else
+                enableInterval();
             document.getElementById("gyroStatus").textContent = deviceon;
             document.getElementById("GyroEnable").style.background = 'Green';
             //    enableGyro();
-            if(devicePlatform == 'Android'){
-            //  if (window.DeviceOrientationEvent) {
-                  window.addEventListener('deviceorientation', orientationHandler, false);
-            //  }
-            }else
-                enableInterval();
         }
     }
 }
-
 function toggleCompass() {
     if (SensorState.compass.Available) {
         if (SensorState.compass.Enabled) {
             SensorState.compass.Enabled = false;
             disableInterval();
+            document.getElementById('magneticNorth').innerHTML = nodata;
             document.getElementById("compassStatus").textContent = deviceoff;
             document.getElementById("CompassEnable").style.background = 'Gray';
             //   disableCompass();
@@ -572,7 +578,6 @@ function toggleCompass() {
         }
     }
 }
-
 function toggleGPS() {
     if (SensorState.gps.Available) {
         if (SensorState.gps.Enabled) {
@@ -580,8 +585,7 @@ function toggleGPS() {
             disableInterval();
             document.getElementById("gpsStatus").textContent = deviceoff;
             document.getElementById("GPSEnable").style.background = 'Gray';
-            cleangpsOutput();
-
+             
             //disableGPS();
         }
         else {
@@ -594,15 +598,20 @@ function toggleGPS() {
     }
 }
 
+
+
+
 function onSliderStrideChanged(value) {
     var t = document.getElementById('sliderStride');
     Stride = t.textContent = value;
 }
 
+
 function onMySliderOneChanged(value) {
     var t = document.getElementById('sliderLabel1');
     t.textContent = value;
 }
+
 
 function onMySliderTwoChanged(value) {
     var t = document.getElementById('sliderLabel2');
@@ -612,8 +621,10 @@ function onMySliderTwoChanged(value) {
 function onGyroThresholdSliderChanged(value) {
     var t = document.getElementById('turn_thresholdLabel');
     t.textContent = value;
-    var turn_threshold = value;
+
+    turn_threshold = value;
 }
+
 
 function Reset() {
     //      initialize();
@@ -623,13 +634,11 @@ function Reset() {
     initgyro();
     clearcalculatedstate();
 
-
-//    Cleardebugtable();
-//    ClearmotionLogTable();
-//    AddMotionLogRow(" ", " ");
+    Cleardebugtable();
+    ClearmotionLogTable();
+    AddMotionLogRow(" ", " ");
     //        Samples between peaks
     //Min peak to peak distance
-
 
     // To reset controls back to original values uncomment the following code.
     /*      document.getElementById("StrideRange").value = 2.0;
@@ -642,7 +651,6 @@ function Reset() {
     MotionType = 0;
     document.getElementById("motionTypeLabel").textContent = motionTypeStep;*/
 }
-
 function toggledebugmsgMode() {
     debugmsgen = !debugmsgen;
     if (!debugmsgen) {
@@ -683,6 +691,8 @@ function toggleMode() {
     }
 }
 
+
+
 function toggleTurns() {
     TurnMode = !TurnMode;
     if (!TurnMode) {
@@ -692,6 +702,7 @@ function toggleTurns() {
         document.getElementById("turnLabel").textContent = turnsVariable;
     }
 }
+
 
 function toggleMotionType() {
     MotionType = !MotionType;
@@ -703,33 +714,38 @@ function toggleMotionType() {
     }
 }
 
+
 function onSelectPollRate(value) {
     getReadingInterval = value;
 }
 
+
 function Calibrate() {
     updateOrientation(-CalculatedState.orientation);
+
 }
+
+
 
 function initialize() {
     devicePlatform = device.platform;
-    document.getElementById('AccelEnable').addEventListener('click', /*@static_cast(EventListener)*/toggleAccelerometer, false);
-    document.getElementById('GyroEnable').addEventListener("click", /*@static_cast(EventListener)*/toggleGyrometer, false);
-    document.getElementById('CompassEnable').addEventListener("click", /*@static_cast(EventListener)*/toggleCompass, false);
-    document.getElementById('GPSEnable').addEventListener("click", /*@static_cast(EventListener)*/toggleGPS, false);
-    document.getElementById('ButtonReset').addEventListener("click", /*@static_cast(EventListener)*/Reset, false);
-    document.getElementById('ButtonMode').addEventListener("click", /*@static_cast(EventListener)*/toggleMode, false);
-    document.getElementById('ButtonTurns').addEventListener("click", /*@static_cast(EventListener)*/toggleTurns, false);
-    document.getElementById('ButtonMotionType').addEventListener("click", /*@static_cast(EventListener)*/toggleMotionType, false);
-    document.getElementById('CalibrateButton').addEventListener("click", /*@static_cast(EventListener)*/Calibrate, false);
-    document.getElementById('DebugLogButton').addEventListener("click", /*@static_cast(EventListener)*/toggledebugmsgMode, false);
-    document.getElementById('ForceGPScoorduse').addEventListener("click", /*@static_cast(EventListener)*/toggleforcegpsMode, false);
-    document.getElementById('MotionLogButton').addEventListener("click", /*@static_cast(EventListener)*/togglemotionmsgMode, false);
+    document.getElementById("AccelEnable").addEventListener("click", /*@static_cast(EventListener)*/toggleAccelerometer, false);
+    document.getElementById("GyroEnable").addEventListener("click", /*@static_cast(EventListener)*/toggleGyrometer, false);
+    document.getElementById("CompassEnable").addEventListener("click", /*@static_cast(EventListener)*/toggleCompass, false);
+    document.getElementById("GPSEnable").addEventListener("click", /*@static_cast(EventListener)*/toggleGPS, false);
+    document.getElementById("ButtonReset").addEventListener("click", /*@static_cast(EventListener)*/Reset, false);
+    document.getElementById("ButtonMode").addEventListener("click", /*@static_cast(EventListener)*/toggleMode, false);
+    document.getElementById("ButtonTurns").addEventListener("click", /*@static_cast(EventListener)*/toggleTurns, false);
+    document.getElementById("ButtonMotionType").addEventListener("click", /*@static_cast(EventListener)*/toggleMotionType, false);
+    document.getElementById("CalibrateButton").addEventListener("click", /*@static_cast(EventListener)*/Calibrate, false);
+    document.getElementById("DebugLogButton").addEventListener("click", /*@static_cast(EventListener)*/toggledebugmsgMode, false);
+    document.getElementById("ForceGPScoorduse").addEventListener("click", /*@static_cast(EventListener)*/toggleforcegpsMode, false);
+    document.getElementById("MotionLogButton").addEventListener("click", /*@static_cast(EventListener)*/togglemotionmsgMode, false);
     // document.getElementById("scenario3Open").disabled = false;
     // document.getElementById("scenario3Revoke").disabled = true;
     // document.getElementById("scenarios").addEventListener("change", /*@static_cast(EventListener)*/resetAll, false);
-
-  //  var accelerometer = Windows.Devices.Sensors.Accelerometer.getDefault();
+        
+    // var accelerometer = Windows.Devices.Sensors.Accelerometer.getDefault();
     var accelerometer = navigator.accelerometer;
     SensorState.accel.accelerometer = accelerometer;
     if (SensorState.accel.accelerometer) {
@@ -745,70 +761,9 @@ function initialize() {
         document.getElementById("accelStatus").textContent = notfound;
     }
 
-
-    var gps = navigator.geolocation; //new Windows.Devices.Geolocation.Geolocator();
-    SensorState.gps.gpsdevice = gps;
-    if (gps) {
-        SensorState.gps.Available = true;
-    }
-    else {
-        document.getElementById("gpsStatus").textContent = notfound;
-    }
-
-
-    var compass = navigator.compass;//Windows.Devices.Sensors.Compass.getDefault();
-    SensorState.compass.compassdevice = compass;
-    if (compass) {
-        // Choose a report interval supported by the sensor
-        var minimumReportInterval = compass.minimumReportInterval;
-        var reportInterval = minimumReportInterval > 16 ? minimumReportInterval : 16;
-        // compass.reportInterval = reportInterval;
-        SensorState.compass.getReadingInterval = reportInterval;
-        getReadingInterval = reportInterval > getReadingInterval ? reportInterval : getReadingInterval;
-        SensorState.compass.Available = true;
-    } else {
-        SensorState.compass.Available = false;
-        document.getElementById("compassStatus").textContent = notfound;
-    }
-   // alert("the device is"+ device.platform);
-
-
-    Reset();
-    var pollRateSelection = document.getElementById("pollRateSelect");
-    pollRateSelection.addEventListener("change", function (e) {
-        onSelectPollRate(pollRateSelection.value);
-    }, false);
-
-
-    var LocalStrideSlider = document.getElementById("StrideRange");
-    LocalStrideSlider.addEventListener("change", function (e) {
-        onSliderStrideChanged(LocalStrideSlider.value);
-    }, false);
-
-
-    var MySliderOne = document.getElementById("samplesSlider1");
-    MySliderOne.addEventListener("change", function (e) {
-        onMySliderOneChanged(MySliderOne.value);
-    }, false);
-
-
-    var MySliderTwo = document.getElementById("samplesSlider2");
-    MySliderTwo.addEventListener("change", function (e) {
-        onMySliderTwoChanged(MySliderTwo.value);
-    }, false);
-
-
-    var GyrothresholdSlider = document.getElementById("turn_thresholdslider");
-    GyrothresholdSlider.addEventListener("change", function (e) {
-        onGyroThresholdSliderChanged(GyrothresholdSlider.value);
-    }, false);
-
-    var loggingDurationSelect = document.getElementById("pollRateSelect");
-    var loggingDuration = loggingDurationSelect.options[loggingDurationSelect.selectedIndex].value * 1000;
-
-    if(devicePlatform == 'Android'){
+    if (devicePlatform == 'Android') {
         SensorState.gyro.Available = true;
-    }else{
+    } else {
         var gyrometer = Windows.Devices.Sensors.Gyrometer.getDefault();
         SensorState.gyro.gyrometer = gyrometer;
         if (SensorState.gyro.gyrometer) {
@@ -824,4 +779,61 @@ function initialize() {
             document.getElementById("gyroStatus").textContent = notfound;
         }
     }
+
+    var compass = navigator.compass;//Windows.Devices.Sensors.Compass.getDefault();
+    SensorState.compass.compassdevice = compass;
+    if (compass) {
+        // Choose a report interval supported by the sensor
+        var minimumReportInterval = compass.minimumReportInterval;
+        var reportInterval = minimumReportInterval > 16 ? minimumReportInterval : 16;
+        // compass.reportInterval = reportInterval;
+        SensorState.compass.getReadingInterval = reportInterval;
+        getReadingInterval = reportInterval > getReadingInterval ? reportInterval : getReadingInterval;
+        SensorState.compass.Available = true;
+    } else {
+        SensorState.compass.Available = false;
+        document.getElementById("compassStatus").textContent = notfound;
+    }
+
+    var gps = navigator.geolocation;//new Windows.Devices.Geolocation.Geolocator();
+    SensorState.gps.gpsdevice = gps;
+    if (gps) {
+        SensorState.gps.Available = true;
+
+
+    }
+    else {
+        //  SensorState.gps.Available = false;
+        document.getElementById("compassStatus").textContent = notfound;
+    }
+    Reset();
+    var pollRateSelection = document.getElementById("pollRateSelect");
+    pollRateSelection.addEventListener("change", function (e) {
+        onSelectPollRate(pollRateSelection.value);
+    }, false);
+
+    var LocalStrideSlider = document.getElementById("StrideRange");
+    LocalStrideSlider.addEventListener("change", function (e) {
+        onSliderStrideChanged(LocalStrideSlider.value);
+    }, false);
+
+    var MySliderOne = document.getElementById("samplesSlider1");
+    MySliderOne.addEventListener("change", function (e) {
+        onMySliderOneChanged(MySliderOne.value);
+    }, false);
+
+    var MySliderTwo = document.getElementById("samplesSlider2");
+    MySliderTwo.addEventListener("change", function (e) {
+        onMySliderTwoChanged(MySliderTwo.value);
+    }, false);
+
+    var GyrothresholdSlider = document.getElementById("turn_thresholdslider");
+    GyrothresholdSlider.addEventListener("change", function (e) {
+        onGyroThresholdSliderChanged(GyrothresholdSlider.value);
+    }, false);
+
+
+
+    var loggingDurationSelect = document.getElementById("pollRateSelect");
+    var loggingDuration = loggingDurationSelect.options[loggingDurationSelect.selectedIndex].value * 1000;
 }
