@@ -74,7 +74,7 @@ function calStateClass() {
 }
 var CalculatedState = new calStateClass();
 
-var getReadingInterval = 16;
+var getReadingInterval = 5;//16;
 var DebugMessageRow = 0;
 var MotionLogRow = 0;
 var MotionLogColumn = 0;
@@ -521,7 +521,7 @@ function toggleAccelerometer() {
         }
         else {
             SensorState.accel.Enabled = true;
-            var option = { frequency: 10 };
+            var option = { frequency: 1 };
             watchID = null;
             watchID = SensorState.accel.accelerometer.watchAcceleration(onSuccess, onError, option);
           //  SensorState.accel.accelerometer.getCurrentAcceleration(onSuccess, onError);
