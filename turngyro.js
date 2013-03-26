@@ -1,4 +1,3 @@
-
 var curr_gyro_angle = 0;
 var curr_gyro_z = 0;
 var stop_angle = 0;
@@ -24,6 +23,7 @@ function turnfromgyro() {
     curr_gyro_angle += (-curr_gyro_z * getReadingInterval) / 1000;
     curr_gyro_angle %= 360;
 
+    curr_gyro_angle =(270 - curr_gyro_z) * -1;
 
     if (Math.abs(curr_gyro_angle) > turn_threshold) {
         start_turn = 1;
