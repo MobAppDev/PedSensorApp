@@ -33,6 +33,7 @@ function turnfromgyro() {
     if (Math.abs(curr_gyro_z) < 1 && start_turn == 1) {
         stop_angle = curr_gyro_angle;
 
+        AddTapMessageRow("Snap Angle:::" + curr_gyro_angle.toFixed(2));
         if (TurnMode == 0) {
             if (curr_gyro_angle > 0 && curr_gyro_angle < 45)
                 stop_angle = 0;
